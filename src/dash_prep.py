@@ -21,8 +21,8 @@ class ChartDataPreprocessor:
     @staticmethod
     def serie_igae_preprocessor():
         data_loader = DataLoader()
-        igae_data = [data_loader.carga_local('data/inegi/csv/737121.csv'),
-                     data_loader.carga_local('data/inegi/csv/737219.csv')]
+        igae_data = [pd.read_csv('https://macro-forecast.s3.amazonaws.com/data/inegi/csv/737121.csv'),
+                     pd.read_csv('https://macro-forecast.s3.amazonaws.com/data/inegi/csv/737219.csv')]
         igae_df = pd.merge(igae_data[0], igae_data[1], how='inner', on='date')
         igae_df = igae_df.loc[igae_df['date']>='2000-01-01']
         igae_df.set_index('date', inplace=True)
@@ -32,8 +32,8 @@ class ChartDataPreprocessor:
     @staticmethod
     def datos_corr_preprocessor():
         data_loader = DataLoader()
-        corr_data = [data_loader.carga_local('data/inegi/csv/737121.csv'), # IGAE Original
-                     data_loader.carga_local('data/inegi/csv/740933.csv')] # Consumo privado
+        corr_data = [pd.read_csv('https://macro-forecast.s3.amazonaws.com/data/inegi/csv/737121.csv'),
+                     pd.read_csv('https://macro-forecast.s3.amazonaws.com/data/inegi/csv/737219.csv')]
         corr_data = pd.merge(corr_data[0], corr_data[1], how='inner', on='date')
 
         corr_data = corr_data.loc[corr_data['date']>='2000-01-01']
